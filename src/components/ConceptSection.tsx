@@ -16,19 +16,18 @@ export default function ConceptSection() {
             <div className="space-y-6 text-center">
               <p className="text-lg text-gray-700 leading-relaxed">
                 Mother Vegetables Confidence MV-Si002は、
-                地球上に生命が誕生した35億年前の環境から
-                インスピレーションを得て開発されました。
+                35億年前に誕生した地球最初の生命体を再現しました。
+                私たちはそれを「マザーベジタブル」と呼んでいます。
               </p>
               <p className="text-gray-600 leading-relaxed">
-                古代の海に存在した特殊な微粒子構造を現代技術で再現。
-                肌表面に極薄のベールを形成し、
-                まるで陶器のような滑らかさと輝きを実現します。
+                地球最初の生命の神秘をご自身の肌で感じてほしい。
+                類まれな吸着効果により、日中の汗やベタつき、
+                テカリを防いで、24時間美しい状態を保ちます。
               </p>
               <p className="text-gray-600 leading-relaxed">
-                朝のたった5秒のひと塗りで、
-                24時間崩れ知らずの美しさをキープ。
-                忙しい現代を生きるあなたの、
-                新しい美の習慣をご提案します。
+                医薬部外品原料規格をクリアした、
+                肌に安心・安全なオーガニック成分。
+                朝の5秒で、透明感のある陶器肌へ。
               </p>
             </div>
           </div>

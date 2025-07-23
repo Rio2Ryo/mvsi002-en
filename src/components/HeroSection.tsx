@@ -104,8 +104,8 @@ export default function HeroSection() {
             
             {/* サブコピー */}
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
-              35億年前の生命起源から生まれた特殊微粒子配合。<br className="hidden sm:block" />
-              崩れ知らずの陶器肌で、24時間美しさが持続。
+              35億年前、地球最初の生命体を再現。<br className="hidden sm:block" />
+              類まれな吸着効果で、24時間美しさが持続。
             </p>
             
             {/* 製品名 */}

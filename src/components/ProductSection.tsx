@@ -10,7 +10,7 @@ export default function ProductSection() {
       size: '1g',
       title: 'お試しサイズ',
       description: '1g - 約30日分',
-      features: ['特殊微粒子成分 1g配合', '約30日分', '携帯に便利なコンパクトケース'],
+      features: ['マザーベジタブル 1g配合', '約30日分', '携帯に便利なコンパクトケース'],
       originalPrice: '¥3,300',
       price: '¥2,200',
       popular: false
@@ -19,7 +19,7 @@ export default function ProductSection() {
       size: '2g',
       title: 'スタンダードサイズ',
       description: '2g - 約60日分',
-      features: ['特殊微粒子成分 2g配合', '約60日分', 'エレガントなコンパクトケース'],
+      features: ['マザーベジタブル 2g配合', '約60日分', '携帯に便利なコンパクトケース'],
       originalPrice: '¥5,500',
       price: '¥3,300',
       popular: true
@@ -28,7 +28,7 @@ export default function ProductSection() {
       size: '5g',
       title: 'お得な大容量',
       description: '5g - 約150日分',
-      features: ['特殊微粒子成分 5g配合', '約150日分', '特別な大容量ラグジュアリーケース'],
+      features: ['マザーベジタブル 5g配合', '約150日分', '特別な大容量ラグジュアリーケース'],
       originalPrice: '¥8,800',
       price: '¥5,500',
       popular: false
@@ -36,16 +36,17 @@ export default function ProductSection() {
   ];
 
   const ingredients = [
-    { name: '特殊微粒子成分', description: '35億年前の生命起源から生まれた天然成分' },
+    { name: 'マザーベジタブル（シリカ）', description: '35億年前に誕生した地球最初の生命体' },
     { name: '天然由来ミネラルパウダー', description: '肌に優しい自然由来の成分' },
     { name: 'オーガニック植物エキス', description: '厳選された植物から抽出した美容成分' },
     { name: '保湿成分', description: 'ヒアルロン酸・コラーゲン配合' }
   ];
 
   const effects = [
-    { title: '毛穴・凹凸を自然にカバー', description: '光拡散効果で滑らかな肌に' },
-    { title: '24時間崩れない仕上がり', description: '朝から夜まで美しさが持続' },
-    { title: '肌への優しさを追求', description: '医薬部外品認定の安心処方' }
+    { title: '化粧崩れ防止効果', description: '類まれな吸着効果で汗やテカリを防ぎます' },
+    { title: '透明感のある陶器肌', description: '細かい粒子が肌を整え、美しい陶器肌を再現' },
+    { title: 'トーンアップ効果', description: '肌を明るく見せ、自然な輝きを与えます' },
+    { title: 'スキンケア効果', description: '肌を保護しながら美しく整えます' }
   ];
 
   return (
