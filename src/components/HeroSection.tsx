@@ -130,7 +130,7 @@ export default function HeroSection() {
               </button>
               
               <button 
-                onClick={() => document.getElementById('concept')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4 border border-white/30 text-white text-sm tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
               >
                 詳細を見る

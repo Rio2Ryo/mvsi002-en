@@ -146,9 +146,9 @@ export default function TestimonialSection() {
           >
             ×
           </button>
-          <div className="relative max-w-2xl mx-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="aspect-square bg-gray-100 rounded-xl flex items-center justify-center">
-              <p className="text-gray-500 text-xl">
+          <div className="relative max-w-4xl mx-auto w-full h-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <div className="w-full max-h-[90vh] aspect-square bg-gray-100 rounded-xl flex items-center justify-center shadow-2xl">
+              <p className="text-gray-500 text-3xl">
                 {modalImage.startsWith('before') ? 'Before' : 'After'} Photo {modalImage.slice(-1)}
               </p>
             </div>
