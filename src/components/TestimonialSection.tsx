@@ -146,18 +146,12 @@ export default function TestimonialSection() {
           >
             ×
           </button>
-          <div className="bg-white rounded-2xl p-8 max-w-2xl mx-auto" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-2xl font-light mb-6 text-center">
-              {modalImage.startsWith('before') ? '使用前の肌状態' : '使用後の肌状態'}
-            </h3>
+          <div className="relative max-w-2xl mx-auto" onClick={(e) => e.stopPropagation()}>
             <div className="aspect-square bg-gray-100 rounded-xl flex items-center justify-center">
               <p className="text-gray-500 text-xl">
                 {modalImage.startsWith('before') ? 'Before' : 'After'} Photo {modalImage.slice(-1)}
               </p>
             </div>
-            <p className="text-center mt-6 text-gray-600">
-              {modalImage.startsWith('before') ? '毛穴・凹凸が目立つ肌の状態' : '陶器のような滑らかな肌へ変化'}
-            </p>
           </div>
         </div>
       )}

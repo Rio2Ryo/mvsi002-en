@@ -119,14 +119,20 @@ export default function HeroSection() {
             
             {/* CTAボタン */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <button className="group relative px-8 py-4 overflow-hidden">
+              <button 
+                onClick={() => document.getElementById('product')?.scrollIntoView({ behavior: 'smooth' })}
+                className="group relative px-8 py-4 overflow-hidden"
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#B8860B] to-[#D4C4B0] transition-transform duration-300 group-hover:scale-110" />
                 <span className="relative text-white text-sm tracking-wider font-medium">
                   購入する
                 </span>
               </button>
               
-              <button className="px-8 py-4 border border-white/30 text-white text-sm tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+              <button 
+                onClick={() => document.getElementById('concept')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-4 border border-white/30 text-white text-sm tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm"
+              >
                 詳細を見る
               </button>
             </div>
