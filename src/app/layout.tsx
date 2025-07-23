@@ -10,11 +10,11 @@ const notoSansJP = Noto_Sans_JP({
 
 export const metadata: Metadata = {
   title: "Mother Vegetables Confidence MV-Si002 | 24時間崩れない陶器肌へ",
-  description: "35億年前の生命起源から生まれた特殊微粒子配合。朝の5秒で24時間美しさが持続する、医薬部外品認定のフェイスパウダー。",
+  description: "35億年前、地球最初の生命体を再現。朝の5秒で24時間美しさが持続する、医薬部外品認定のフェイスパウダー。",
   keywords: "フェイスパウダー,化粧品,医薬部外品,Mother Vegetables,陶器肌,化粧崩れ防止",
   openGraph: {
     title: "Mother Vegetables Confidence MV-Si002",
-    description: "35億年前の生命起源から生まれた特殊微粒子配合フェイスパウダー",
+    description: "35億年前、地球最初の生命体を再現したフェイスパウダー",
     type: "website",
     locale: "ja_JP",
   },
