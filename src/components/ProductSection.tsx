@@ -35,12 +35,11 @@ export default function ProductSection() {
     }
   ];
 
-  const ingredients = [
-    { name: 'マザーベジタブル（シリカ）', description: '35億年前に誕生した地球最初の生命体' },
-    { name: '天然由来ミネラルパウダー', description: '肌に優しい自然由来の成分' },
-    { name: 'オーガニック植物エキス', description: '厳選された植物から抽出した美容成分' },
-    { name: '保湿成分', description: 'ヒアルロン酸・コラーゲン配合' }
-  ];
+  const ingredient = {
+    name: 'マザーベジタブル（シリカ）',
+    description: '35億年前に誕生した地球最初の生命体',
+    details: '地球上で最も純粋なシリカを含有。類まれな吸着効果により、24時間美しさを保ちます。'
+  };
 
   const effects = [
     { title: '化粧崩れ防止効果', description: '類まれな吸着効果で汗やテカリを防ぎます' },
@@ -125,53 +124,44 @@ export default function ProductSection() {
             ))}
           </div>
 
-          {/* Ingredients Section */}
+          {/* Ingredients and Effects Section */}
           <div className="mt-20">
-            <h3 className="text-xl md:text-2xl font-light mb-8 md:mb-12 text-center text-gray-800 tracking-wide">全成分・効果</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              <div className="bg-white rounded-2xl p-6 md:p-8 border border-[#b8860b]/20 hover:border-[#b8860b]/40 transition-all duration-300 shadow-lg">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#b8860b]/20 to-[#d4c4b0]/20 rounded-full flex items-center justify-center mr-4">
-                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-[#b8860b]">
-                      <path fill="currentColor" d="M2,3H11V12H2V3M7,8L9.5,10.5L16,4L17.5,5.5L9.5,13.5L5.5,9.5L7,8M13,3H22V12H13V3M2,13H11V22H2V13M13,13H22V22H13V13Z"/>
+            <h3 className="text-xl md:text-2xl font-light mb-8 md:mb-12 text-center text-gray-800 tracking-wide">成分・効果</h3>
+            
+            {/* Main Ingredient - Featured Section */}
+            <div className="mb-12 max-w-4xl mx-auto">
+              <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 md:p-12 border border-[#b8860b]/30 shadow-xl">
+                <div className="text-center">
+                  <div className="w-24 h-24 bg-gradient-to-br from-[#b8860b]/20 to-[#d4c4b0]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg viewBox="0 0 24 24" className="w-12 h-12 text-[#b8860b]">
+                      <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8Z"/>
                     </svg>
                   </div>
-                  <h4 className="text-lg md:text-xl font-light text-gray-800">主要成分</h4>
-                </div>
-                <div className="space-y-4">
-                  {ingredients.map((ingredient, index) => (
-                    <div key={index} className="border-l-2 border-[#b8860b]/30 pl-4 hover:border-[#b8860b] transition-colors duration-300">
-                      <p className="text-sm font-medium text-[#b8860b]">{ingredient.name}</p>
-                      <p className="text-xs text-gray-600">{ingredient.description}</p>
-                    </div>
-                  ))}
+                  <h4 className="text-2xl md:text-3xl font-light text-[#b8860b] mb-2">主成分</h4>
+                  <p className="text-xl md:text-2xl font-medium text-gray-800 mb-3">{ingredient.name}</p>
+                  <p className="text-base text-gray-600 mb-4">{ingredient.description}</p>
+                  <p className="text-sm text-gray-500 leading-relaxed max-w-2xl mx-auto">{ingredient.details}</p>
                 </div>
               </div>
-              
-              <div className="bg-white rounded-2xl p-6 md:p-8 border border-[#b8860b]/20 hover:border-[#b8860b]/40 transition-all duration-300 shadow-lg">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#b8860b]/20 to-[#d4c4b0]/20 rounded-full flex items-center justify-center mr-4">
-                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-[#b8860b]">
-                      <path fill="currentColor" d="M12,8A3,3 0 0,1 15,11A3,3 0 0,1 12,14A3,3 0 0,1 9,11A3,3 0 0,1 12,8M12,2L13.39,5.42C13.65,5.15 13.98,5 14.34,5C14.69,5 15,5.15 15.27,5.42L18.7,4L20.1,6.93L17.25,8.75C17.28,8.91 17.28,9.08 17.25,9.25L20.1,11.07L18.7,14L15.27,12.58C15,12.85 14.69,13 14.34,13C13.98,13 13.65,12.85 13.39,12.58L10,14L8.6,11.07L11.45,9.25C11.42,9.08 11.42,8.91 11.45,8.75L8.6,6.93L10,4L13.39,5.42L12,2M12,22L10.61,18.58L7.22,20L5.82,17.07L8.67,15.25C8.64,15.08 8.64,14.91 8.67,14.75L5.82,12.93L7.22,10L10.61,11.42C10.88,11.15 11.19,11 11.54,11C11.9,11 12.21,11.15 12.47,11.42L15.87,10L17.27,12.93L14.42,14.75C14.45,14.91 14.45,15.08 14.42,15.25L17.27,17.07L15.87,20L12.47,18.58L12,22Z"/>
-                    </svg>
-                  </div>
-                  <h4 className="text-lg md:text-xl font-light text-gray-800">期待できる効果</h4>
-                </div>
-                <div className="space-y-4">
-                  {effects.map((effect, index) => (
-                    <div key={index} className="flex items-start">
-                      <span className="inline-block w-6 h-6 bg-[#b8860b]/20 rounded-full flex-shrink-0 mt-0.5 mr-3">
-                        <svg viewBox="0 0 24 24" className="w-6 h-6 text-[#b8860b]">
-                          <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M7,13L10,16L17,9L15.59,7.58L10,13.17L8.41,11.59L7,13Z"/>
-                        </svg>
-                      </span>
-                      <div>
-                        <p className="text-sm font-medium text-[#b8860b]">{effect.title}</p>
-                        <p className="text-xs text-gray-600 mt-1">{effect.description}</p>
-                      </div>
+            </div>
+            
+            {/* Effects Grid */}
+            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
+              <h4 className="text-lg md:text-xl font-light text-gray-800 mb-6 text-center">期待できる効果</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {effects.map((effect, index) => (
+                  <div key={index} className="flex items-start p-4 rounded-xl hover:bg-gray-50 transition-colors duration-300">
+                    <span className="inline-block w-8 h-8 bg-gradient-to-br from-[#b8860b]/20 to-[#d4c4b0]/20 rounded-full flex-shrink-0 mt-0.5 mr-4 flex items-center justify-center">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#b8860b]">
+                        <path fill="currentColor" d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M7,13L10,16L17,9L15.59,7.58L10,13.17L8.41,11.59L7,13Z"/>
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="text-base font-medium text-[#b8860b] mb-1">{effect.title}</p>
+                      <p className="text-sm text-gray-600">{effect.description}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
