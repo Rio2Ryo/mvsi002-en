@@ -36,9 +36,9 @@ export default function ProductSection() {
   ];
 
   const ingredient = {
-    name: 'マザーベジタブル（シリカ）',
+    name: 'マザーベジタブル',
     description: '35億年前に誕生した地球最初の生命体',
-    details: '地球上で最も純粋なシリカを含有。類まれな吸着効果により、24時間美しさを保ちます。'
+    details: '類まれな吸着効果により、24時間美しさを保ちます。'
   };
 
   const effects = [
