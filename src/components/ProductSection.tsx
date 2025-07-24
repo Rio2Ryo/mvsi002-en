@@ -67,13 +67,13 @@ export default function ProductSection() {
             {products.map((product) => (
               <div
                 key={product.size}
-                className={`size-selector bg-white rounded-2xl p-6 md:p-8 border-2 text-center shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group cursor-pointer ${
+                className={`size-selector bg-white rounded-2xl p-6 md:p-8 ${product.popular ? 'pt-10 md:pt-12' : ''} border-2 text-center shadow-lg hover:shadow-xl transition-all duration-300 relative group cursor-pointer ${
                   product.popular ? 'border-[#b8860b]' : 'border-[#b8860b]/20'
                 } ${selectedSize === product.size ? 'ring-4 ring-[#b8860b] ring-opacity-50' : ''}`}
                 onClick={() => setSelectedSize(product.size)}
               >
                 {product.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#b8860b] to-[#d4c4b0] text-black px-6 py-1 rounded-full text-sm font-bold">
+                  <div className="absolute top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#b8860b] to-[#d4c4b0] text-black px-6 py-1 rounded-full text-sm font-bold z-20">
                     人気No.1
                   </div>
                 )}

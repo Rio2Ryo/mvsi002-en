@@ -98,14 +98,14 @@ export default function HeroSection() {
             
             {/* メインタイトル */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-thin text-white leading-tight">
-              朝の<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B8860B] to-[#D4C4B0]">5秒</span>が、<br />
-              <span className="font-normal">一日を変える。</span>
+              朝の<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B8860B] to-[#D4C4B0]">5秒</span>で、<br />
+              <span className="font-normal">24時間の自信を。</span>
             </h1>
             
             {/* サブコピー */}
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
-              35億年前、地球最初の生命体を再現。<br className="hidden sm:block" />
-              類まれな吸着効果で、24時間美しさが持続。
+              素肌への自信が、あなたの美しさを解放する。<br className="hidden sm:block" />
+              35億年の生命力が、揺るがない陶器肌を実現。
             </p>
             
             {/* 製品名 */}
