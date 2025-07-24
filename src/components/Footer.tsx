@@ -1,9 +1,6 @@
 export default function Footer() {
   const links = [
-    { label: "会社概要", href: "https://www.dotpb.jp/" },
-    { label: "プライバシーポリシー", href: "https://www.dotpb.jp/" },
-    { label: "特定商取引法", href: "https://www.dotpb.jp/" },
-    { label: "お問い合わせ", href: "https://www.dotpb.jp/" }
+    { label: "会社概要", href: "https://www.dotpb.jp/" }
   ];
 
   return (

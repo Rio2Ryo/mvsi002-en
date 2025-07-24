@@ -2,7 +2,7 @@ export default function FAQSection() {
   const faqs = [
     {
       question: "敏感肌でも使えますか？",
-      answer: "はい、医薬部外品認定を受けた安全な処方です。敏感肌の方でも安心してお使いいただけます。"
+      answer: "はい、医薬部外品原料規格をクリアした安全な処方です。敏感肌の方でも安心してお使いいただけます。"
     },
     {
       question: "いつ使えばいいですか？",

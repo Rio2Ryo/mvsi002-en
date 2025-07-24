@@ -110,7 +110,7 @@ export default function HeroSection() {
             
             {/* 製品名 */}
             <div className="space-y-2">
-              <p className="text-sm text-[#B8860B] tracking-wider">医薬部外品認定</p>
+              <p className="text-sm text-[#B8860B] tracking-wider">医薬部外品原料規格をクリア</p>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-thin text-white tracking-wider">
                 Mother Vegetables Confidence
               </h2>
