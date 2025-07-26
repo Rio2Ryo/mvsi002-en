@@ -1,8 +1,4 @@
 export default function Footer() {
-  const links = [
-    { label: "会社概要", href: "https://www.dotpb.jp/" }
-  ];
-
   return (
     <footer className="py-16 md:py-20 bg-gray-100 border-t border-gray-200">
       <div className="container mx-auto px-4">
@@ -10,26 +6,32 @@ export default function Footer() {
           <h3 className="text-xl md:text-2xl text-[#b8860b] mb-4 font-light tracking-wider">
             Mother Vegetables Confidence
           </h3>
-          <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8">MV-Si002</p>
+          <p className="text-base md:text-lg text-gray-600 mb-8">MV-Si002</p>
           
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-gray-600 mb-8 md:mb-12 text-sm">
-            {links.map((link) => (
-              <a 
-                key={link.label}
-                href={link.href} 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#b8860b] transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+          <div className="mb-8">
+            <p className="text-sm font-medium text-gray-700 mb-2">dotpb株式会社</p>
+            <p className="text-sm text-gray-600">〒103-0026</p>
+            <p className="text-sm text-gray-600 mb-2">東京都中央区日本橋兜町5-1 兜町第1平和ビル3階</p>
+            <a href="mailto:info@dotpb.jp" className="text-sm text-[#b8860b] hover:underline">
+              info@dotpb.jp
+            </a>
+          </div>
+          
+          <div className="mb-8">
+            <a 
+              href="https://www.dotpb.jp/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-600 hover:text-[#b8860b] transition-colors"
+            >
+              特定商取引に基づく表記
+            </a>
           </div>
           
           <div className="w-24 md:w-32 h-[1px] bg-gradient-to-r from-transparent via-[#B8860B] to-transparent mx-auto mb-6 md:mb-8" />
           
           <p className="text-xs md:text-sm text-gray-500 font-light">
-            © 2025 Mother Vegetables Confidence. All rights reserved.
+            © 2025 dotpb.jp. All rights reserved.
           </p>
         </div>
       </div>
