@@ -19,7 +19,7 @@ export default function Footer() {
           
           <div className="mb-8">
             <a 
-              href="https://www.dotpb.jp/" 
+              href="https://www.dotpb.jp/specified-commercial-transactions-act" 
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-600 hover:text-[#b8860b] transition-colors"
@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="w-24 md:w-32 h-[1px] bg-gradient-to-r from-transparent via-[#B8860B] to-transparent mx-auto mb-6 md:mb-8" />
           
           <p className="text-xs md:text-sm text-gray-500 font-light">
-            © 2025 dotpb.jp. All rights reserved.
+            Copyright © 2025 dotpb Co.,Ltd. All Rights Reserved.
           </p>
         </div>
       </div>
