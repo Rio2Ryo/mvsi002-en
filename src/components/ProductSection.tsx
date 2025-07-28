@@ -38,11 +38,11 @@ export default function ProductSection() {
   const ingredient = {
     name: 'マザーベジタブル',
     description: '35億年前に誕生した地球最初の生命体',
-    details: '類まれな吸着効果により、24時間美しさを保ちます。'
+    details: '独自の吸着機能により、24時間美しさを保ちます。'
   };
 
   const effects = [
-    { title: '化粧崩れ防止効果', description: '類まれな吸着効果で汗やテカリを防ぎます' },
+    { title: '化粧崩れ防止効果', description: '汗やテカリをしっかり吸着し、崩れを防ぎます' },
     { title: '透明感のある陶器肌', description: '細かい粒子が肌を整え、美しい陶器肌を再現' },
     { title: 'トーンアップ効果', description: '肌を明るく見せ、自然な輝きを与えます' },
     { title: 'スキンケア効果', description: '肌を保護しながら美しく整えます' }

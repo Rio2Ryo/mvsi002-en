@@ -105,7 +105,7 @@ export default function HeroSection() {
             {/* サブコピー */}
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
               素肌への自信が、あなたの美しさを解放する。<br className="hidden sm:block" />
-              35億年の生命力が、揺るがない陶器肌を実現。
+              35億年の生命力で、陶器のような美肌へ。
             </p>
             
             {/* 製品名 */}

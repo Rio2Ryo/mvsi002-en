@@ -21,8 +21,8 @@ export default function ConceptSection() {
               </p>
               <p className="text-gray-600 leading-relaxed">
                 地球最初の生命の神秘をご自身の肌で感じてほしい。
-                類まれな吸着効果により、日中の汗やベタつき、
-                テカリを防いで、24時間美しい状態を保ちます。
+                優れた密着力で日中の汗やベタつきを抑え、
+                一日中サラサラで美しい肌を保ちます。
               </p>
               <p className="text-gray-600 leading-relaxed">
                 医薬部外品原料規格をクリアした、
