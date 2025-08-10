@@ -1,6 +1,6 @@
 // Usage: Check if the current environment is a sandbox environment and show a modal to inform the user
 
-import {CLIENT_ID} from "@/constants/constants";
+import {CLIENT_ID} from "../../constants/constants";
 
 export function checkSandboxEnvironment() {
     const url = window.location.hostname;

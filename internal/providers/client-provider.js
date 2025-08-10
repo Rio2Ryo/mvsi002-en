@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {getMetaSiteId, installedApps} from "@/internal/utils/installed-apps";
-import {useAsyncHandler} from "@/src/hooks/async-handler";
+import {getMetaSiteId, installedApps} from "../utils/installed-apps";
+import {useAsyncHandler} from "../../src/hooks/async-handler";
 
 // Create a context for the client
 const ClientContext = createContext(null);

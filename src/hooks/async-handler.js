@@ -1,5 +1,5 @@
 import {useCallback} from "react";
-import {useLoading} from "@/src/context/loading-context";
+import {useLoading} from "../context/loading-context";
 
 /*
  * Custom hook to handle asynchronous operations with loading state management.
