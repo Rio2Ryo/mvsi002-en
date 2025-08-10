@@ -1,0 +1,32 @@
+[
+  {
+    "name": "お試しサイズ",
+    "slug": "trial-mvsi",
+    "description": "1g - 約30日分",
+    "originalprice": "3,300円",
+    "price": "2,200円",
+    "ItemPic": "/item_pic1.jpg",
+    "wixProductId": "33c9805f-c608-f32d-68fc-c7f7277ff74a",
+    "url": "https://www.dotpb.jp/product-page/trial"
+  },
+  {
+    "name": "スタンダードサイズ",
+    "slug": "standard-mvsi",
+    "description": "2g - 約60日分",
+    "originalprice": "5,500円",
+    "price": "3,300円",
+    "ItemPic": "/item_pic2.jpg",
+    "wixProductId": "711d5ba0-1cb9-927e-b760-6ca12d673d54",
+    "url": "https://www.dotpb.jp/product-page/standard"
+  },
+  {
+   "name": "お得な大容量",
+    "slug": "large-mvsi",
+    "description": "35g - 約150日分",
+    "originalprice": "8,800円",
+    "price": "5,500円",
+    "ItemPic": "/item_pic3.jpg",
+    "wixProductId": "c74b0927-9236-8491-e60b-05ecf40159cd",
+    "url": "https://www.dotpb.jp/product-page/large"
+  }
+]
