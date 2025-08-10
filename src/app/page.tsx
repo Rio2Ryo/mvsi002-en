@@ -7,23 +7,23 @@ import { createClient, OAuthStrategy } from "@wix/sdk";
 import { products } from "@wix/stores";
 import { currentCart } from "@wix/ecom";
 import { redirects } from "@wix/redirects";
-import testIds from "./src/utils/test-ids";
-import { CLIENT_ID } from "./constants/constants";
+import testIds from "../utils/test-ids";
+import { CLIENT_ID } from "../../constants/constants";
 import Link from "next/link";
 import Head from "next/head";
-import styles from "./styles/app.module.css";
-import { useAsyncHandler } from "./src/hooks/async-handler";
-import { useClient } from "./internal/providers/client-provider";
-import { useModal } from "./internal/providers/modal-provider";
-import HeroSection from "./components/HeroSection";
-import ConceptSection from "./components/ConceptSection";
-import FeatureSection from "./components/FeatureSection";
-import TestimonialSection from "./components/TestimonialSection";
-import ProductSection from "./components/ProductSection";
-import Effects from "./components/Effects";
-import GuaranteeSection from "./components/GuaranteeSection";
-import FAQSection from "./components/FAQSection";
-import Footer from "./components/Footer";
+import styles from "../../styles/app.module.css";
+import { useAsyncHandler } from "../hooks/async-handler";
+import { useClient } from "../../internal/providers/client-provider";
+import { useModal } from "../../internal/providers/modal-provider";
+import HeroSection from "../../components/HeroSection";
+import ConceptSection from "../../components/ConceptSection";
+import FeatureSection from "../../components/FeatureSection";
+import TestimonialSection from "../../components/TestimonialSection";
+import ProductSection from "../../components/ProductSection";
+import Effects from "../../components/Effects";
+import GuaranteeSection from "../../components/GuaranteeSection";
+import FAQSection from "../../components/FAQSection";
+import Footer from "../../components/Footer";
 
 const myWixClient = createClient({
   modules: { products, currentCart, redirects },
