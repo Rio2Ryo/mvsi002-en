@@ -11,19 +11,19 @@ import testIds from "../utils/test-ids";
 import { CLIENT_ID } from "../../constants/constants";
 import Link from "next/link";
 import Head from "next/head";
-import styles from "../../styles/app.module.css";
+import styles from "../../styles/app.module.css"; // このパスも修正が必要でした
 import { useAsyncHandler } from "../hooks/async-handler";
-import { useClient } from "../../internal/providers/client-provider";
-import { useModal } from "../../internal/providers/modal-provider";
-import HeroSection from "../../components/HeroSection";
-import ConceptSection from "../../components/ConceptSection";
-import FeatureSection from "../../components/FeatureSection";
-import TestimonialSection from "../../components/TestimonialSection";
-import ProductSection from "../../components/ProductSection";
-import Effects from "../../components/Effects";
-import GuaranteeSection from "../../components/GuaranteeSection";
-import FAQSection from "../../components/FAQSection";
-import Footer from "../../components/Footer";
+import { useClient } from "../providers/client-provider"; // このパスも修正が必要でした
+import { useModal } from "../providers/modal-provider"; // このパスも修正が必要でした
+import HeroSection from "../components/HeroSection";
+import ConceptSection from "../components/ConceptSection";
+import FeatureSection from "../components/FeatureSection";
+import TestimonialSection from "../components/TestimonialSection";
+import ProductSection from "../components/ProductSection";
+import Effects from "../components/Effects";
+import GuaranteeSection from "../components/GuaranteeSection";
+import FAQSection from "../components/FAQSection";
+import Footer from "../components/Footer";
 
 const myWixClient = createClient({
   modules: { products, currentCart, redirects },
