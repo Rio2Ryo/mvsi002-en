@@ -3,10 +3,13 @@ import React, {useEffect, useState} from "react";
 
 import {createClient, OAuthStrategy} from "@wix/sdk";
 import {members} from "@wix/members";
-import {CLIENT_ID} from "@/constants/constants";
-import {useAsyncHandler} from "@/src/hooks/async-handler";
-import {checkDefaultClientId, checkSandboxEnvironment,} from "@/internal/utils/enviroment-check";
-import {useModal} from "@/internal/providers/modal-provider";
+import {CLIENT_ID} from "../constants/constants";
+import {useAsyncHandler} from "../src/hooks/async-handler";
+import {
+    checkDefaultClientId,
+    checkSandboxEnvironment,
+} from "../internal/utils/enviroment-check";
+import {useModal} from "../internal/providers/modal-provider";
 
 // We're creating a Wix client using the createClient function from the Wix SDK.
 const myWixClient = createClient({
@@ -132,8 +135,8 @@ export default function LoginBar() {
                         {/* We display a greeting message. */}
                         Hello{" "}
                         {/* If the user is logged in, we display the user's nickname or slug, if they exist.
-                          If neither exist, we display an empty string.
-                          If the user is not logged in, we display "visitor". */}
+                            If neither exist, we display an empty string.
+                            If the user is not logged in, we display "visitor". */}
                         {myWixClient.auth.loggedIn()
                             ? member.profile?.nickname || member.profile?.slug || ""
                             : "visitor"}

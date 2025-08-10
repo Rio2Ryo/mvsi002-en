@@ -5,19 +5,19 @@ import {createClient, OAuthStrategy} from "@wix/sdk";
 import {products} from "@wix/stores";
 import {currentCart} from "@wix/ecom";
 import {redirects} from "@wix/redirects";
-import testIds from "@/src/utils/test-ids";
-import {CLIENT_ID} from "@/constants/constants";
+import testIds from "../src/utils/test-ids";
+import {CLIENT_ID} from "../constants/constants";
 import Link from "next/link";
 import Head from "next/head";
-import styles from "@/styles/app.module.css";
-import {useAsyncHandler} from "@/src/hooks/async-handler";
-import {useClient} from "@/internal/providers/client-provider";
-import {useModal} from "@/internal/providers/modal-provider";
+import styles from "../styles/app.module.css";
+import {useAsyncHandler} from "../src/hooks/async-handler";
+import {useClient} from "../internal/providers/client-provider";
+import {useModal} from "../internal/providers/modal-provider";
 
 // We're creating a Wix client using the createClient function from the Wix SDK.
 const myWixClient = createClient({
     modules: {products, currentCart, redirects},
-    siteId: process.env.WIX_SITE_ID, // ✅ これを追加
+    siteId: process.env.WIX_SITE_ID,
     auth: OAuthStrategy({
         clientId: CLIENT_ID,
         tokens: JSON.parse(Cookies.get("session") || null),
@@ -210,8 +210,8 @@ export default function Store() {
                                 >
                                     <span className={styles.fullWidth}>{product.name}</span>
                                     <span style={{width: "100px", textAlign: "right"}}>
-                    {product.convertedPriceData.formatted.discountedPrice}
-                  </span>
+                      {product.convertedPriceData.formatted.discountedPrice}
+                    </span>
                                 </section>
                             );
                         })

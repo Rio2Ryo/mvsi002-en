@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import {useEffect, useState} from "react";
 import {createClient, OAuthStrategy} from "@wix/sdk";
-import {CLIENT_ID} from "@/constants/constants";
+import {CLIENT_ID} from "../constants/constants";
 
 // We're creating a Wix client using the createClient function from the Wix SDK.
 const myWixClient = createClient({
@@ -73,7 +73,7 @@ export default function LoginCallback() {
                 </>
             )}
             {/* We check if there's a nextPage. If there is, we display a link to it.
-            If there isn't, we display a loading message. */}
+             If there isn't, we display a loading message. */}
             {nextPage ? <a href={nextPage}>Continue</a> : <>Loading...</>}
         </article>
     );
