@@ -1,4 +1,4 @@
-import {CLIENT_ID} from "@/constants/constants";
+import {CLIENT_ID} from "../../constants/constants"; // パスを修正
 import {createClient, OAuthStrategy} from "@wix/sdk";
 import {redirects} from "@wix/redirects";
 import Cookies from "js-cookie";
