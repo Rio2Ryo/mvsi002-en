@@ -10,12 +10,13 @@ import { currentCart } from "@wix/ecom";
 import { redirects } from "@wix/redirects";
 
 import testIds from "../utils/test-ids";
-import { CLIENT_ID } from "../constants/constants"; // ← src/app から1つ上がって constants
-// import styles from "../styles/app.module.css"; // 使っていないので一旦外しています（必要なら正しい場所に置いて復帰）
+// ★ 環境変数から読み込む（Vercel で設定：NEXT_PUBLIC_WIX_CLIENT_ID / NEXT_PUBLIC_WIX_SITE_ID）
+const CLIENT_ID = process.env.NEXT_PUBLIC_WIX_CLIENT_ID as string | undefined;
+const SITE_ID = process.env.NEXT_PUBLIC_WIX_SITE_ID as string | undefined;
 
 import { useAsyncHandler } from "../hooks/async-handler";
-import { useClient } from "../providers/client-provider";
-import { useModal } from "../providers/modal-provider";
+import { useClient } from "../context/client-provider";   // ← ここを providers→context
+import { useModal } from "../context/modal-provider";      // ← 同上
 
 import HeroSection from "../components/HeroSection";
 import ConceptSection from "../components/ConceptSection";
@@ -27,15 +28,14 @@ import GuaranteeSection from "../components/GuaranteeSection";
 import FAQSection from "../components/FAQSection";
 import Footer from "../components/Footer";
 
-// Cookie が無い場合 JSON.parse で落ちないように防御
+// Cookie が無い場合に JSON.parse で落ちないよう防御
 const sessionStr = Cookies.get("session");
 
 const myWixClient = createClient({
   modules: { products, currentCart, redirects },
-  // クライアント側で使う環境変数は NEXT_PUBLIC_ プレフィックス推奨
-  siteId: process.env.NEXT_PUBLIC_WIX_SITE_ID,
+  siteId: SITE_ID,
   auth: OAuthStrategy({
-    clientId: CLIENT_ID,
+    clientId: CLIENT_ID || "",
     tokens: sessionStr ? JSON.parse(sessionStr) : undefined,
   }),
 });
@@ -52,8 +52,8 @@ export default function Home() {
     setIsLoading(true);
     try {
       await handleAsync(async () => {
-        const productList = await myWixClient.products.queryProducts().find();
-        setProductList(productList.items);
+        const res = await myWixClient.products.queryProducts().find();
+        setProductList(res.items);
       });
     } catch (error) {
       console.error("Error fetching products", error);
@@ -130,7 +130,6 @@ export default function Home() {
             callbacks: { postFlowUrl: window.location.href },
           });
 
-        // TS 的にも安全: href に代入
         window.location.href = redirectSession.redirectSession.fullUrl;
       });
     } catch (error) {
@@ -159,22 +158,16 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      {/* タイトルは app/layout.tsx の export const metadata で設定してください */}
-      <main
-        data-testid={testIds.COMMERCE_PAGE.CONTAINER}
-        className="relative min-h-screen"
-      >
-        <HeroSection />
-        <ConceptSection />
-        <FeatureSection />
-        <TestimonialSection />
-        <ProductSection />
-        <Effects />
-        <GuaranteeSection />
-        <FAQSection />
-        <Footer />
-      </main>
-    </>
+    <main data-testid={testIds.COMMERCE_PAGE.CONTAINER} className="relative min-h-screen">
+      <HeroSection />
+      <ConceptSection />
+      <FeatureSection />
+      <TestimonialSection />
+      <ProductSection />
+      <Effects />
+      <GuaranteeSection />
+      <FAQSection />
+      <Footer />
+    </main>
   );
 }

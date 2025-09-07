@@ -1,12 +1,16 @@
-// middleware.js（修正版）
 import { createClient, OAuthStrategy } from "@wix/sdk";
 import { NextResponse } from "next/server";
 
-// ここを相対に変更（middleware.js はリポジトリ直下なので ./src/... ）
-import { CLIENT_ID } from "./src/constants/constants";
-import { installedApps, WixApplications } from "./src/internal/utils/installed-apps";
+// ★ 環境変数から直接取得（Vercel に WIX_CLIENT_ID または NEXT_PUBLIC_WIX_CLIENT_ID を設定）
+const CLIENT_ID =
+  process.env.WIX_CLIENT_ID || process.env.NEXT_PUBLIC_WIX_CLIENT_ID || "";
 
-// 以降はそのまま
+// internal がリポジトリ直下にある想定。src/ の中なら './src/internal/utils/installed-apps' に変更。
+import {
+  installedApps,
+  WixApplications,
+} from "./internal/utils/installed-apps";
+
 export async function middleware(request) {
   const path = request.nextUrl.pathname;
 
