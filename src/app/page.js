@@ -1,4 +1,4 @@
-"use client"; // この行はApp Routerで必要です
+"use client";
 
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
@@ -10,11 +10,8 @@ import { products } from "@wix/stores";
 import { currentCart } from "@wix/ecom";
 import { redirects } from "@wix/redirects";
 
-// パスを修正・統一しています
 import testIds from "@/utils/test-ids";
 import { useAsyncHandler } from "@/hooks/async-handler";
-import { useClient } from "@/providers/client-provider";
-import { useModal } from "@/providers/modal-provider";
 import HeroSection from "@/components/HeroSection";
 import ConceptSection from "@/components/ConceptSection";
 import FeatureSection from "@/components/FeatureSection";
@@ -25,13 +22,34 @@ import GuaranteeSection from "@/components/GuaranteeSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 
+// ---- ここから：providers を使わない最小置き換え ----
+const MSID = process.env.NEXT_PUBLIC_WIX_SITE_ID || process.env.WIX_SITE_ID || "";
+const msid = MSID;
+const openModal = (_type, opts) => {
+  // UI は未実装なので、アクションだけ実行（必要なら alert などに差し替え）
+  opts?.primaryAction?.();
+};
+// ---- ここまで ----
+
+// Cookieパース安全化
+const sessionStr = Cookies.get("session");
+let sessionTokens;
+try {
+  sessionTokens = sessionStr ? JSON.parse(sessionStr) : undefined;
+} catch {
+  sessionTokens = undefined;
+}
+
+// ※ クライアントで使うので NEXT_PUBLIC_ 推奨（既存のWIX_SITE_IDでも動作はします）
 const myWixClient = createClient({
   modules: { products, currentCart, redirects },
-  siteId: process.env.WIX_SITE_ID,
+  siteId: process.env.NEXT_PUBLIC_WIX_SITE_ID || process.env.WIX_SITE_ID,
   auth: OAuthStrategy({
-    // CLIENT_IDを環境変数から読み込みます
-    clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
-    tokens: JSON.parse(Cookies.get("session") || null),
+    clientId:
+      process.env.NEXT_PUBLIC_WIX_CLIENT_ID ||
+      process.env.NEXT_PUBLIC_CLIENT_ID || // あなたの既存名を念のため併用
+      "",
+    tokens: sessionTokens,
   }),
 });
 
@@ -40,15 +58,13 @@ export default function Home() {
   const [cart, setCart] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const handleAsync = useAsyncHandler();
-  const { msid } = useClient();
-  const { openModal } = useModal();
 
   async function fetchProducts() {
     setIsLoading(true);
     try {
       await handleAsync(async () => {
-        const productList = await myWixClient.products.queryProducts().find();
-        setProductList(productList.items);
+        const res = await myWixClient.products.queryProducts().find();
+        setProductList(res.items);
       });
     } catch (error) {
       console.error("Error fetching products", error);
@@ -67,7 +83,7 @@ export default function Home() {
 
   async function addToCart(product) {
     await handleAsync(async () => {
-      const options = product.productOptions.reduce(
+      const options = (product.productOptions ?? []).reduce(
         (selected, option) => ({
           ...selected,
           [option.name]: option.choices[0].description,
@@ -119,19 +135,19 @@ export default function Home() {
             channelType: currentCart.ChannelType.WEB,
           });
 
-        const redirect = await myWixClient.redirects.createRedirectSession({
-          ecomCheckout: { checkoutId },
-          callbacks: { postFlowUrl: window.location.href },
-        });
-        window.location = redirect.redirectSession.fullUrl;
+        const redirect =
+          await myWixClient.redirects.createRedirectSession({
+            ecomCheckout: { checkoutId },
+            callbacks: { postFlowUrl: window.location.href },
+          });
+
+        window.location.href = redirect.redirectSession.fullUrl;
       });
     } catch (error) {
       openModal("premium", {
         primaryAction: () => {
           window.open(
-            `https://manage.wix.com/premium-purchase-plan/dynamo?siteGuid=${
-              msid || ""
-            }`,
+            `https://manage.wix.com/premium-purchase-plan/dynamo?siteGuid=${msid || ""}`,
             "_blank"
           );
         },
@@ -155,15 +171,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>
-          Mother Vegetables Confidence MV-Si002 | 24時間崩れない陶器肌へ
-        </title>
+        <title>Mother Vegetables Confidence MV-Si002 | 24時間崩れない陶器肌へ</title>
       </Head>
 
-      <main
-        data-testid={testIds.COMMERCE_PAGE.CONTAINER}
-        className="relative min-h-screen"
-      >
+      <main data-testid={testIds.COMMERCE_PAGE.CONTAINER} className="relative min-h-screen">
         <HeroSection />
         <ConceptSection />
         <FeatureSection />
