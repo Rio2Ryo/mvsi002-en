@@ -1,48 +1,43 @@
-"use client";
+"use client"; // この行はApp Routerで必要です
 
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 import { createClient, OAuthStrategy } from "@wix/sdk";
 import { products } from "@wix/stores";
 import { currentCart } from "@wix/ecom";
 import { redirects } from "@wix/redirects";
 
-import testIds from "../utils/test-ids";
-// ★ 環境変数から読み込む（Vercel で設定：NEXT_PUBLIC_WIX_CLIENT_ID / NEXT_PUBLIC_WIX_SITE_ID）
-const CLIENT_ID = process.env.NEXT_PUBLIC_WIX_CLIENT_ID as string | undefined;
-const SITE_ID = process.env.NEXT_PUBLIC_WIX_SITE_ID as string | undefined;
-
-import { useAsyncHandler } from "../hooks/async-handler";
-import { useClient } from "../context/client-provider";   // ← ここを providers→context
-import { useModal } from "../context/modal-provider";      // ← 同上
-
-import HeroSection from "../components/HeroSection";
-import ConceptSection from "../components/ConceptSection";
-import FeatureSection from "../components/FeatureSection";
-import TestimonialSection from "../components/TestimonialSection";
-import ProductSection from "../components/ProductSection";
-import Effects from "../components/Effects";
-import GuaranteeSection from "../components/GuaranteeSection";
-import FAQSection from "../components/FAQSection";
-import Footer from "../components/Footer";
-
-// Cookie が無い場合に JSON.parse で落ちないよう防御
-const sessionStr = Cookies.get("session");
+// パスを修正・統一しています
+import testIds from "@/utils/test-ids";
+import { useAsyncHandler } from "@/hooks/async-handler";
+import { useClient } from "@/providers/client-provider";
+import { useModal } from "@/providers/modal-provider";
+import HeroSection from "@/components/HeroSection";
+import ConceptSection from "@/components/ConceptSection";
+import FeatureSection from "@/components/FeatureSection";
+import TestimonialSection from "@/components/TestimonialSection";
+import ProductSection from "@/components/ProductSection";
+import Effects from "@/components/Effects";
+import GuaranteeSection from "@/components/GuaranteeSection";
+import FAQSection from "@/components/FAQSection";
+import Footer from "@/components/Footer";
 
 const myWixClient = createClient({
   modules: { products, currentCart, redirects },
-  siteId: SITE_ID,
+  siteId: process.env.WIX_SITE_ID,
   auth: OAuthStrategy({
-    clientId: CLIENT_ID || "",
-    tokens: sessionStr ? JSON.parse(sessionStr) : undefined,
+    // CLIENT_IDを環境変数から読み込みます
+    clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+    tokens: JSON.parse(Cookies.get("session") || null),
   }),
 });
 
 export default function Home() {
-  const [productList, setProductList] = useState<any[]>([]);
-  const [cart, setCart] = useState<any>({});
+  const [productList, setProductList] = useState([]);
+  const [cart, setCart] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const handleAsync = useAsyncHandler();
   const { msid } = useClient();
@@ -52,8 +47,8 @@ export default function Home() {
     setIsLoading(true);
     try {
       await handleAsync(async () => {
-        const res = await myWixClient.products.queryProducts().find();
-        setProductList(res.items);
+        const productList = await myWixClient.products.queryProducts().find();
+        setProductList(productList.items);
       });
     } catch (error) {
       console.error("Error fetching products", error);
@@ -70,10 +65,10 @@ export default function Home() {
     } catch {}
   }
 
-  async function addToCart(product: any) {
+  async function addToCart(product) {
     await handleAsync(async () => {
-      const options = (product.productOptions ?? []).reduce(
-        (selected: any, option: any) => ({
+      const options = product.productOptions.reduce(
+        (selected, option) => ({
           ...selected,
           [option.name]: option.choices[0].description,
         }),
@@ -82,7 +77,7 @@ export default function Home() {
 
       if (cart) {
         const existingProduct = cart?.lineItems?.find(
-          (item: any) => item.catalogReference.catalogItemId === product._id
+          (item) => item.catalogReference.catalogItemId === product._id
         );
         if (existingProduct) {
           return addExistingProduct(
@@ -124,19 +119,19 @@ export default function Home() {
             channelType: currentCart.ChannelType.WEB,
           });
 
-        const redirectSession =
-          await myWixClient.redirects.createRedirectSession({
-            ecomCheckout: { checkoutId },
-            callbacks: { postFlowUrl: window.location.href },
-          });
-
-        window.location.href = redirectSession.redirectSession.fullUrl;
+        const redirect = await myWixClient.redirects.createRedirectSession({
+          ecomCheckout: { checkoutId },
+          callbacks: { postFlowUrl: window.location.href },
+        });
+        window.location = redirect.redirectSession.fullUrl;
       });
     } catch (error) {
       openModal("premium", {
         primaryAction: () => {
           window.open(
-            `https://manage.wix.com/premium-purchase-plan/dynamo?siteGuid=${msid || ""}`,
+            `https://manage.wix.com/premium-purchase-plan/dynamo?siteGuid=${
+              msid || ""
+            }`,
             "_blank"
           );
         },
@@ -144,7 +139,7 @@ export default function Home() {
     }
   }
 
-  async function addExistingProduct(lineItemId: string, quantity: number) {
+  async function addExistingProduct(lineItemId, quantity) {
     const { cart } =
       await myWixClient.currentCart.updateCurrentCartLineItemQuantity([
         { _id: lineItemId, quantity },
@@ -158,16 +153,27 @@ export default function Home() {
   }, []);
 
   return (
-    <main data-testid={testIds.COMMERCE_PAGE.CONTAINER} className="relative min-h-screen">
-      <HeroSection />
-      <ConceptSection />
-      <FeatureSection />
-      <TestimonialSection />
-      <ProductSection />
-      <Effects />
-      <GuaranteeSection />
-      <FAQSection />
-      <Footer />
-    </main>
+    <>
+      <Head>
+        <title>
+          Mother Vegetables Confidence MV-Si002 | 24時間崩れない陶器肌へ
+        </title>
+      </Head>
+
+      <main
+        data-testid={testIds.COMMERCE_PAGE.CONTAINER}
+        className="relative min-h-screen"
+      >
+        <HeroSection />
+        <ConceptSection />
+        <FeatureSection />
+        <TestimonialSection />
+        <ProductSection />
+        <Effects />
+        <GuaranteeSection />
+        <FAQSection />
+        <Footer />
+      </main>
+    </>
   );
 }
