@@ -1,20 +1,22 @@
-"use client"; // この行はApp Routerで必要です
+"use client";
 
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import { createClient, OAuthStrategy } from "@wix/sdk";
 import { products } from "@wix/stores";
 import { currentCart } from "@wix/ecom";
 import { redirects } from "@wix/redirects";
+
 import testIds from "../utils/test-ids";
-import { CLIENT_ID } from "../../constants/constants";
-import Link from "next/link";
-import Head from "next/head";
-import styles from "../../styles/app.module.css"; // このパスも修正が必要でした
+import { CLIENT_ID } from "../constants/constants"; // ← src/app から1つ上がって constants
+// import styles from "../styles/app.module.css"; // 使っていないので一旦外しています（必要なら正しい場所に置いて復帰）
+
 import { useAsyncHandler } from "../hooks/async-handler";
-import { useClient } from "../providers/client-provider"; // このパスも修正が必要でした
-import { useModal } from "../providers/modal-provider"; // このパスも修正が必要でした
+import { useClient } from "../providers/client-provider";
+import { useModal } from "../providers/modal-provider";
+
 import HeroSection from "../components/HeroSection";
 import ConceptSection from "../components/ConceptSection";
 import FeatureSection from "../components/FeatureSection";
@@ -25,18 +27,22 @@ import GuaranteeSection from "../components/GuaranteeSection";
 import FAQSection from "../components/FAQSection";
 import Footer from "../components/Footer";
 
+// Cookie が無い場合 JSON.parse で落ちないように防御
+const sessionStr = Cookies.get("session");
+
 const myWixClient = createClient({
   modules: { products, currentCart, redirects },
-  siteId: process.env.WIX_SITE_ID,
+  // クライアント側で使う環境変数は NEXT_PUBLIC_ プレフィックス推奨
+  siteId: process.env.NEXT_PUBLIC_WIX_SITE_ID,
   auth: OAuthStrategy({
     clientId: CLIENT_ID,
-    tokens: JSON.parse(Cookies.get("session") || null),
+    tokens: sessionStr ? JSON.parse(sessionStr) : undefined,
   }),
 });
 
 export default function Home() {
-  const [productList, setProductList] = useState([]);
-  const [cart, setCart] = useState({});
+  const [productList, setProductList] = useState<any[]>([]);
+  const [cart, setCart] = useState<any>({});
   const [isLoading, setIsLoading] = useState(true);
   const handleAsync = useAsyncHandler();
   const { msid } = useClient();
@@ -64,10 +70,10 @@ export default function Home() {
     } catch {}
   }
 
-  async function addToCart(product) {
+  async function addToCart(product: any) {
     await handleAsync(async () => {
-      const options = product.productOptions.reduce(
-        (selected, option) => ({
+      const options = (product.productOptions ?? []).reduce(
+        (selected: any, option: any) => ({
           ...selected,
           [option.name]: option.choices[0].description,
         }),
@@ -76,7 +82,7 @@ export default function Home() {
 
       if (cart) {
         const existingProduct = cart?.lineItems?.find(
-          (item) => item.catalogReference.catalogItemId === product._id
+          (item: any) => item.catalogReference.catalogItemId === product._id
         );
         if (existingProduct) {
           return addExistingProduct(
@@ -118,11 +124,14 @@ export default function Home() {
             channelType: currentCart.ChannelType.WEB,
           });
 
-        const redirect = await myWixClient.redirects.createRedirectSession({
-          ecomCheckout: { checkoutId },
-          callbacks: { postFlowUrl: window.location.href },
-        });
-        window.location = redirect.redirectSession.fullUrl;
+        const redirectSession =
+          await myWixClient.redirects.createRedirectSession({
+            ecomCheckout: { checkoutId },
+            callbacks: { postFlowUrl: window.location.href },
+          });
+
+        // TS 的にも安全: href に代入
+        window.location.href = redirectSession.redirectSession.fullUrl;
       });
     } catch (error) {
       openModal("premium", {
@@ -136,7 +145,7 @@ export default function Home() {
     }
   }
 
-  async function addExistingProduct(lineItemId, quantity) {
+  async function addExistingProduct(lineItemId: string, quantity: number) {
     const { cart } =
       await myWixClient.currentCart.updateCurrentCartLineItemQuantity([
         { _id: lineItemId, quantity },
@@ -151,87 +160,11 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Mother Vegetables Confidence MV-Si002 | 24時間崩れない陶器肌へ</title>
-      </Head>
-
-      <main data-testid={testIds.COMMERCE_PAGE.CONTAINER}
-      className="relative min-h-screen"
+      {/* タイトルは app/layout.tsx の export const metadata で設定してください */}
+      <main
+        data-testid={testIds.COMMERCE_PAGE.CONTAINER}
+        className="relative min-h-screen"
       >
-        {/*
-        この部分はコメントアウトされているので、レンダリングには影響しません。
-        必要に応じてコメントアウトを外して利用してください。
-        */}
-        {/*
-        <div>
-          <h2>Choose Products:</h2>
-          {isLoading ? (
-            <p>Loading products...</p>
-          ) : productList.length > 0 ? (
-            productList.map((product) => (
-              <section
-                data-testid={testIds.COMMERCE_PAGE.PRODUCT}
-                key={product._id}
-                onClick={() => addToCart(product)}
-                className={styles.selectable}
-              >
-                <span className={styles.fullWidth}>{product.name}</span>
-                <span style={{ width: "100px", textAlign: "right" }}>
-                  {product.convertedPriceData.formatted.discountedPrice}
-                </span>
-              </section>
-            ))
-          ) : (
-            <div>
-              <p>No products available</p>
-              <Link
-                href={`https://manage.wix.com/dashboard/${msid}/products`}
-                rel="noopener noreferrer"
-                target="_blank"
-                style={{ textDecoration: "underline", color: "#0070f3" }}
-              >
-                Add a product
-              </Link>
-            </div>
-          )}
-        </div>
-        */}
-        {/*
-        <div>
-          <h2>My Cart:</h2>
-          {cart.lineItems?.length > 0 && (
-            <div className={styles.column}>
-              <section
-                className={`${styles.column} ${styles.start} ${styles.active}`}
-                style={{ gap: "24px", borderColor: "rgba(var(--card-border-rgb), 0.15)" }}
-              >
-                <li>
-                  {cart.lineItems.map((item, index) => (
-                    <ul key={index}>
-                      <div style={{ display: "flex", gap: "16px" }}>
-                        <div style={{ fontWeight: "bold" }}>{item.quantity}</div>
-                        <div className={styles.fullWidth}>{item.productName.original}</div>
-                      </div>
-                    </ul>
-                  ))}
-                </li>
-                <h3>Total {cart.subtotal.formattedAmount}</h3>
-              </section>
-              <button
-                className={styles.primary}
-                onClick={() => createRedirect()}
-                style={{ fontWeight: "bold" }}
-                data-testid={testIds.COMMERCE_PAGE.CHECKOUT}
-              >
-                <div>Checkout</div>
-              </button>
-              <button onClick={() => clearCart()} className={styles.secondary}>
-                <span>Clear cart</span>
-              </button>
-            </div>
-          )}
-        </div>
-        */}
         <HeroSection />
         <ConceptSection />
         <FeatureSection />
